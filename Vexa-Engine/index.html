@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vexa 3D Studio & Campus Modeller</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/viewport.css">
+
+   
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+
+   
+  <header id="top-bar">
+    <div class="logo">Vexa <span>3D Studio</span></div>
+    
+    <div class="menu-group">
+      <button id="btn-mode-toggle">Mode: 3D Perspective</button>
+      <div class="v-divider"></div>
+      
+       
+      <div class="dropdown">
+        <button class="dropbtn">+ Add Primitive ▼</button>
+        <div class="dropdown-content">
+          <a href="#" id="add-cube">Cube</a>
+          <a href="#" id="add-cylinder">Cylinder</a>
+          <a href="#" id="add-sphere">Sphere</a>
+          <a href="#" id="add-plane">Plane</a>
+          <a href="#" id="add-wall">Wall Section</a>
+          <a href="#" id="add-roof">Roof (Prism)</a>
+          <a href="#" id="add-stairs">Staircase</a>
+        </div>
+      </div>
+
+      <div class="v-divider"></div>
+      <button id="btn-undo" disabled>↩ Undo</button>
+      <button id="btn-redo" disabled>↪ Redo</button>
+      <button id="btn-duplicate">Duplicate (Ctrl+D)</button>
+      <button id="btn-group">Group (Ctrl+G)</button>
+    </div>
+
+    <div class="menu-group">
+       
+      <label class="snap-label">
+        <input type="checkbox" id="snap-toggle" checked> Snap Grid
+      </label>
+      <select id="snap-size">
+        <option value="0.1">0.1m</option>
+        <option value="0.5">0.5m</option>
+        <option value="1" selected>1.0m</option>
+        <option value="2">2.0m</option>
+      </select>
+      <div class="v-divider"></div>
+      <button class="btn-success" id="btn-export-json">Export Scene JSON</button>
+    </div>
+  </header>
+
+   
+  <div id="app-container">
+    
+     
+    <aside id="left-sidebar">
+      <div class="panel-header">Scene Hierarchy</div>
+      <div id="hierarchy-tree" class="tree-root"></div>
+    </aside>
+
+     
+    <main id="viewport-container">
+      <canvas id="three-canvas"></canvas>
+      
+       
+      <div id="viewport-controls">
+        <button id="view-focus" title="Focus Selected (F)">Focus (F)</button>
+        <button id="view-top" title="Top View (7)">Top (7)</button>
+        <button id="view-front" title="Front View (1)">Front (1)</button>
+        <button id="view-side" title="Side View (3)">Side (3)</button>
+      </div>
+
+       
+      <div id="status-bar">
+        <span>Tool: <b id="current-tool">TRANSLATE</b> (T: Move | R: Rotate | S: Scale)</span>
+        <span>Objects: <b id="stat-count">0</b></span>
+      </div>
+    </main>
+
+     
+    <aside id="right-sidebar">
+      <div class="panel-header">Inspector</div>
+      
+      <div id="inspector-content">
+        <p class="empty-msg">Select an object in the scene to inspect properties.</p>
+        
+        <div id="inspector-fields" style="display: none;">
+          <div class="field-group">
+            <label>Name</label>
+            <input type="text" id="inp-obj-name">
+          </div>
+
+          <div class="field-group">
+            <label>Color</label>
+            <input type="color" id="inp-obj-color">
+          </div>
+
+          <div class="field-group">
+            <label>Position (X, Y, Z)</label>
+            <div class="row-3">
+              <input type="number" id="inp-pos-x" step="0.5">
+              <input type="number" id="inp-pos-y" step="0.5">
+              <input type="number" id="inp-pos-z" step="0.5">
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label>Size / Scale (X, Y, Z)</label>
+            <div class="row-3">
+              <input type="number" id="inp-size-x" step="0.1">
+              <input type="number" id="inp-size-y" step="0.1">
+              <input type="number" id="inp-size-z" step="0.1">
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label>Rotation Y (deg)</label>
+            <input type="number" id="inp-rot-y" step="5">
+          </div>
+
+          <button class="btn-danger" id="btn-delete-obj">Delete Selected</button>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
